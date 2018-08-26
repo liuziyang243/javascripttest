@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <script type="text/javascript">
+        //1.当整个html文档完全加载成功后触发window.onload事件
+        //事件触发时，执行后面的function里边的函数体
+        window.onload=function(){
+            // 2.获取所有的button节点，并取得第一个元素
+            var btn = document.getElementsByTagName("button")[0];
+            // 3.为button的onclick事件赋值，当点击button时，执行函数体
+            btn.onclick = function(){
+                // 4.弹出helloworld
+                alert("hello world");
+            }
+        }
+    </script>
+</head>
+<body>
+<h4>Welcome to webstrom</h4>
+<button>Click me</button>
+</body>
+</html>

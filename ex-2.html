@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dom</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            //点击每个li节点，若li节点的文本值没有^^开头，加上
+            // 有，则去除
+            var liNodes = document.getElementsByTagName("li");
+            //2.使用for循环进行遍历
+            for (var i = 0; i < liNodes.length; i++) {
+                //3. 使用正则表达式判断是否以"^^"开始
+                var reg = /^\^{2}/g;
+                liNodes[i].onclick = function () {
+                    var textValue = this.firstChild.nodeValue;
+                    if (reg.test(textValue)) {
+                        // 调用replace方法去除指定的字符串
+                        textValue = textValue.replace(reg, "");
+                    } else {
+                        textValue = "\^\^" + textValue;
+                    }
+                    this.firstChild.nodeValue = textValue;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<p>你喜欢哪个城市</p>
+<ul id="city">
+    <li id="bj" name="Beijing">北京</li>
+    <li>上海</li>
+    <li>东京</li>
+    <li>首尔</li>
+</ul>
+<br/><br/>
+<p>你喜欢那款单机游戏</p>
+<ul id="game">
+    <li id="rl">红警</li>
+    <li>实况</li>
+    <li>极品飞车</li>
+    <li>魔兽</li>
+</ul>
+<br/><br/>
+name:<input type="text" id="name" name="username" value="default">
+<br/><br/>
+gender:
+<input type="radio" name="gender" value="male"/>male
+<input type="radio" name="gender" value="female"/>female
+</body>
+</html>

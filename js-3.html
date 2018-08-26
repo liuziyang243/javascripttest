@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js3</title>
+    <script type="text/javascript">
+        alert("1");
+
+        // window.onload在整个html文档被完全加载之后出发执行
+        // 所以在其中可以获取到html文档的任何元素
+        window.onload = function () {
+            alert("3");
+        }
+    </script>
+</head>
+<body>
+<button>click me</button>
+</body>
+</html>
+<script type="text/javascript">
+    alert("2");
+</script>
