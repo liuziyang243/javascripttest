@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dom</title>
+    <script type="text/javascript">
+        // 测试insertBefore()插入节点
+        // 该方法除了有插入的功能还有移动的功能
+        window.onload = function () {
+            //1.把#rl插入到bj节点的前面
+            let cityNode = document.getElementById("city");
+            let bjNode = document.getElementById("bj");
+            let rlNode = document.getElementById("rl");
+
+            // cityNode.insertBefore(rlNode, bjNode);
+
+            let last = document.getElementById("dj");
+            insertAfter(rlNode, last);
+        }
+
+        //把newNode插入到reference插入到refNode后面
+        function insertAfter(newNode, refNode) {
+            //1.测试refNode是否为其父节点的最后一个子节点
+            let parentNode = refNode.parentNode;
+            if (parentNode) {
+                let lastNode = parentNode.lastChild;
+                //2.若是，直接把newNode插入为父节点的最后一个子节点即可
+                if (refNode == lastNode) {
+                    parentNode.appendChild(newNode);
+                } else {
+                    //3.若不是，获取referenceNode的下一个兄弟节点，然后插入到其下一个兄弟的前一个节点
+                    let nextNode = refNode.nextSibling;
+                    parentNode.insertBefore(newNode, nextNode);
+                }
+            }
+
+        }
+    </script>
+</head>
+<body>
+<p>你喜欢哪个城市</p>
+<ul id="city">
+    <li id="bj" name="Beijing">北京</li>
+    <li>上海</li>
+    <li id="dj">东京</li>
+    <li id="se">首尔</li>
+</ul>
+<br/><br/>
+<p>你喜欢那款单机游戏</p>
+<ul id="game">
+    <li id="rl">红警</li>
+    <li>实况</li>
+    <li>极品飞车</li>
+    <li>魔兽</li>
+</ul>
+<br/><br/>
+name:<input type="text" id="name" name="username" value="default">
+<br/><br/>
+gender:
+<input type="radio" name="gender" value="male"/>male
+<input type="radio" name="gender" value="female"/>female
+</body>
+</html>
