@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>exercise</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            //1.为#provience添加onChange方法
+            document.getElementById("province").onchange = function () {
+                //1.1把#city节点除第一个子节点外都移除
+                let citiesNode = document.getElementById("city");
+                let cityNodeOptions = citiesNode.getElementsByTagName('option');
+                let len = cityNodeOptions.length;
+                for (let i = 1; i < len; i++) {
+                    //每次都清除第2个，因为数组cityNodeOptions的长度是动态变化的
+                    citiesNode.removeChild(cityNodeOptions[1]);
+                }
+
+                //2.加载cities.xml文件,得到代表改文档的document对象
+                let xmlDoc = parseXML("cities.xml");
+                //3.在cities.xml文档中查找和选择的省匹配的province节点
+                let provinces = xmlDoc.getElementsByTagName("province");
+
+                let provinceVal = this.value;
+                if (provinceVal == "") {
+                    return false;
+                }
+
+                // 重写方法。为了兼容FireFox、Chrome。
+                if (!window.ActiveXObject) {
+                    XMLDocument.prototype.selectSingleNode =
+                        Element.prototype.selectSingleNode = function (xpath) {
+                            let x = this.selectNodes(xpath);
+                            if (!x || x.length < 1) return null;
+                            return x[0];
+                        };
+                    XMLDocument.prototype.selectNodes = Element.prototype.selectNodes =
+                        function (xpath) {
+                            let xpe = new XPathEvaluator();
+                            let nsResolver = xpe.createNSResolver(this.ownerDocument == null ? this.documentElement : this.ownerDocument.documentElement);
+                            let result = xpe.evaluate(xpath, this, nsResolver, 0, null);
+                            let found = [];
+                            let res;
+                            while (res = result.iterateNext())
+                                found.push(res);
+                            return found;
+                        };
+                }
+
+                //使用XPATH技术，在xml中查找匹配的province节点
+                let provinceEles = xmlDoc.selectNodes("//province[@name='"
+                    + provinceVal + "']");
+
+                //4.在得到province节点的所有city子节点
+                let cityNodes = provinceEles[0].getElementsByTagName("city");
+                for (let i = 0; i < cityNodes.length; i++) {
+                    //5.遍历city节点，得到city节点的文本值
+                    let cityName = cityNodes[i].firstChild.nodeValue;
+                    let cityText = document.createTextNode(cityName);
+                    //6.利用得到的文本值创建option节点
+                    //<option>xxx</option>
+                    let cityNode = document.createElement("option");
+                    cityNode.appendChild(cityText);
+                    //7.把6创建的子节点加入到city节点下
+                    citiesNode.appendChild(cityNode);
+                }
+            }
+        };
+
+        //解析xml文件格式的函数，兼容多种浏览器
+        function parseXML(fileName) {
+            try {//Internet Explorer
+                xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+                xmlDoc.async = "false";
+                //加载 XML文档,获取XML文档对象
+                xmlDoc.load(fileName);
+            } catch (e) {//Firefox, Mozilla, Opera, etc.
+                try {
+                    xmlDoc = document.implementation.createDocument("", "", null);
+                    xmlDoc.async = "false";
+                    //加载 XML文档,获取XML文档对象
+                    xmlDoc.load(fileName);
+                } catch (e) {
+                    try {//Google Chrome
+                        var xmlhttp = new window.XMLHttpRequest();
+                        xmlhttp.open("get", fileName, false);
+                        xmlhttp.send(null);
+                        xmlDoc = xmlhttp.responseXML.documentElement;
+                    } catch (e) {
+                        alert("您的浏览器不能正常加载文件。请切换到兼容模式，或者更换浏览器");
+                    }
+                }
+            }
+            return xmlDoc;
+        }
+    </script>
+</head>
+<body>
+<select id="province">
+    <option value="">请选择...</option>
+    <option value="河北省">河北省</option>
+    <option value="辽宁省">辽宁省</option>
+    <option value="山东省">山东省</option>
+</select>
+<select id="city">
+    <option value="...">请选择...</option>
+</select>
+</body>
+</html>
