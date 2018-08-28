@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dom</title>
+    <script src="http://libs.baidu.com/jquery/1.7.2/jquery.js"></script>
+    <script type="text/javascript">
+        /*
+         * 为#employeetable的所有的a节点添加onclick响应函数
+         * 1.弹出确认对话框：确定要删除xx的信息么？xx为当前a节点所在的td所在的tr的第一个td子节点的文本值，且要去除前后空格
+         * 2.若点击确认，则删除a节点所在的行
+         *
+         * 注意：
+         * 1.a节点是一个超级链接，可以在其onclick事件中通过返回false来取消其默认行为
+         * 2.tr的直接父节点为tbody，而不是table
+         * 3.可以把去除前后空格的代码写成一个trim(str)函数
+         *
+         * 需求2：
+         * 为#addEmpButton编写onclick响应函数
+         * 1.获取#name,#email,#salary文本框的文本值
+         * 2.利用1获取的文本值创建三个td节点和一个tr节点，并把以上的三个td节点价位tr节点的子节点
+         * 3.创建一个td节点：<td><a href="deleteEmp?id=xxx">Delete</a></td>
+         * 4.把3创建的td也加为tr的子节点
+         * 5.把tr加为#employeetable的tbody子节点的子节点
+         * 6.为新创建的tr的a子节点添加onclick响应函数，使其也具备删除节点的能力
+         *
+         */
+        $(function () {
+
+            $("tr :nth-child(4) a").click(function () {
+                alert("del");
+                $(this).remove();
+                return false;
+            });
+
+            $("#addEmpButton").click(function () {
+                let name = $.trim($("#name").val());
+                let email = $.trim($("#email").val());
+                let salary = $.trim($("#salary").val());
+
+                if (name === "") {
+                    alert("输入姓名为空！")
+                    return false;
+                }
+
+                if (email === "") {
+                    alert("输入邮箱为空！")
+                    return false;
+                }
+
+                if (salary === "") {
+                    alert("输入薪水为空！")
+                    return false;
+                }
+            })
+        })
+
+    </script>
+</head>
+<body>
+<center>
+    <br><br>添加新员工<br/><br/>
+    name:<input id="name" type="text" name="name">&nbsp;&nbsp;
+    email:<input id="email" type="text" name="email">&nbsp;&nbsp;
+    salary:<input id="salary" type="text" name="salary"><br/><br/>
+    <button type="button" id="addEmpButton">Submit</button>
+    <br/><br/>
+    <hr/>
+    <table id="employeetable" border="1" cellpadding="5" cellspacing="0">
+        <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Salary</th>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td>Tom</td>
+            <td>tom@tom.com</td>
+            <td>5000</td>
+            <td><a href="deleteEmp?id=001">Delete</a></td>
+        </tr>
+        <tr>
+            <td>Jerry</td>
+            <td>jerry@tom.com</td>
+            <td>8000</td>
+            <td><a href="deleteEmp?id=002">Delete</a></td>
+        </tr>
+        <tr>
+            <td>Bob</td>
+            <td>bob@bob.com</td>
+            <td>15000</td>
+            <td><a href="deleteEmp?id=003">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+</center>
+</body>
+</html>

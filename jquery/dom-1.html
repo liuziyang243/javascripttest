@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dom</title>
+    <script src="http://libs.baidu.com/jquery/1.7.2/jquery.js"></script>
+    <script type="text/javascript">
+        // 测试使用jQuery操作文本节点、属性节点及查找元素节点
+        $(function () {
+            //1.操作文本节点，通过jQuery对象的text()方法
+            alert($("#bj").text());
+            $("#bj").text("更新后的内容");
+
+            //2.操作属性节点:通过jQuery对象的attr()方法
+            //注：直接操作value属性值可以使用更便捷的val()方法
+            alert($(":text[name='username']").attr("value"));
+            $(":text[name='username']").attr("value", "更新后的值");
+        })
+
+    </script>
+</head>
+<body>
+<p>你喜欢哪个城市</p>
+<ul id="city">
+    <li id="bj" name="Beijing">北京</li>
+    <li>上海</li>
+    <li id="dj">东京</li>
+    <li id="se">首尔</li>
+</ul>
+<br/><br/>
+<p>你喜欢那款单机游戏</p>
+<ul id="game">
+    <li id="rl">红警</li>
+    <li>实况</li>
+    <li>极品飞车</li>
+    <li>魔兽</li>
+</ul>
+<br/><br/>
+name:<input type="text" id="name" name="username" value="default">
+<br/><br/>
+gender:
+<input type="radio" name="gender" value="male"/>male
+<input type="radio" name="gender" value="female"/>female
+</body>
+</html>
