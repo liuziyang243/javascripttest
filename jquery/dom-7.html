@@ -5,21 +5,17 @@
     <title>dom</title>
     <script src="http://libs.baidu.com/jquery/1.7.2/jquery.js"></script>
     <script type="text/javascript">
-        // 测试使用jQuery clone方法
+        // 测试使用jQuery wrap,wrapAll,wrapInner方法
         $(function () {
-            $("li").click(function () {
-                alert($(this).text());
-            })
+            // 包装li本身
+            $("li").wrap("<font color='blue'></font>");
 
-            //复制#bj节点,并添加到#url节点的后面
-            //1.克隆节点时，需要注意克隆后的节点的id属性，若原节点有id属性，
-            //则克隆后会出现在一个文档中有两个id相同的情况
-            //2.clone(true)：在克隆节点的同时，克隆节点将包含行为
-            $("#bj").clone(true)
-                .attr("id", "bj2")
-                .insertAfter($("#rl"));
+            //包转所有的li
+            $("#city li").wrapAll("<font color='#7fff00'></font>")
+
+            //包装li里面的文字
+            $("#language li").wrapInner("<font color='#663399'></font>")
         })
-
     </script>
 </head>
 <body>
@@ -37,6 +33,14 @@
     <li>实况</li>
     <li>极品飞车</li>
     <li>魔兽</li>
+</ul>
+<br/>
+<p>你喜欢哪种开发语言</p>
+<ul id="language">
+    <li>Java</li>
+    <li>JavaScript</li>
+    <li>python</li>
+    <li>.net</li>
 </ul>
 <br/><br/>
 name:<input type="text" id="name" name="username" value="default">

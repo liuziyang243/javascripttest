@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dom</title>
+    <script src="http://libs.baidu.com/jquery/1.7.2/jquery.js"></script>
+    <script type="text/javascript">
+        // 测试使用jQuery replace(replaceAll)(方法:替换节点
+
+        /*
+         * 1.replaceWith（用后面替换前面）,replaceAll（前面替换后面）一对方法，可以完成一件事，就是主语和宾语哪个在前的问题
+         * 2.以上俩个方法还有移动节点的功能
+         * 3.节点互换需要先克隆节点
+         * 4.let rl = $("#rl").replaceWith($bj2);
+         */
+        $(function () {
+            //创建一个<li>上硅谷</li>节点，替换#city的最后一个li子节点
+            // $("<li>上硅谷</li>").replaceAll($("#city li:last"));
+
+            //创建一个<li>上硅谷</li>节点
+            //替换#city的第二个li字节点
+            // $("#city li:eq(1)").replaceWith($("<li>上硅谷</li>"));
+
+            //3.互换以下两个节点:#rl和#bj
+            // 直接使用$("#bj").replaceWith($("#rl"));，还有移动的功能
+
+            //节点的互换需要先克隆节点
+            let $bj2 = $("#bj").clone(true);
+            let rl = $("#rl").replaceWith($bj2);
+            alert(2);
+            $("#bj").replaceWith(rl);
+
+        })
+
+    </script>
+</head>
+<body>
+<p>你喜欢哪个城市</p>
+<ul id="city">
+    <li id="bj" name="Beijing">北京</li>
+    <li>上海</li>
+    <li id="dj">东京</li>
+    <li id="se">首尔</li>
+</ul>
+<br/><br/>
+<p>你喜欢那款单机游戏</p>
+<ul id="game">
+    <li id="rl">红警</li>
+    <li>实况</li>
+    <li>极品飞车</li>
+    <li>魔兽</li>
+</ul>
+<br/><br/>
+name:<input type="text" id="name" name="username" value="default">
+<br/><br/>
+gender:
+<input type="radio" name="gender" value="male"/>male
+<input type="radio" name="gender" value="female"/>female
+</body>
+</html>
