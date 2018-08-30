@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bind</title>
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/1.7.2/jquery.js"></script>
+
+    <script type="text/javascript">
+        //为.head添加onclick相应函数,若.content隐藏则显示，若.content显示则隐藏
+        $(function () {
+            /*$(".head").click(function () {
+                //使用is()方法来判断某个给定的jquery对象是否符合指定的选择器
+                let flag = $(".content").is(":hidden");
+                if (flag) {
+                    //show()方法，使隐藏变为显示
+                    $(".content").show();
+                } else {
+                    $(".content").hide();
+                }
+            });*/
+
+            //bind：为jquery对象绑定事件
+            /*$(".head").bind("click",function () {
+                //使用is()方法来判断某个给定的jquery对象是否符合指定的选择器
+                let flag = $(".content").is(":hidden");
+                if (flag) {
+                    //show()方法，使隐藏变为显示
+                    $(".content").show();
+                } else {
+                    $(".content").hide();
+                }
+            })*/
+
+            // mouseover:鼠标移上去
+            // mouseout:鼠标移出
+            /*$(".head").mouseover(function () {
+                $(".content").show();
+            }).mouseout(function () {
+                $(".content").hide();
+            })*/
+
+            //合成事件：hover：鼠标一上去执行第一个函数，移出执行第二个函数
+            /*$(".head").hover(function () {
+                $(".content").show();
+            }, function () {
+                $(".content").hide();
+            });*/
+
+            //合成事件：toggle：点击执行地一个函数，再次点击执行第二个函数，
+            // 后续如果还有函数则继续执行; 循环执行
+            $(".head").toggle(function () {
+                $(".content").show();
+            }, function () {
+                $(".content").hide();
+            })
+        })
+    </script>
+</head>
+<body>
+<div id="pannel">
+    <h5 class="head">什么是jQuery?</h5>
+    <div class="content">
+        jQuery是继Prototype之后有一个优秀的JavaScript库。
+    </div>
+</div>
+</body>
+</html>
