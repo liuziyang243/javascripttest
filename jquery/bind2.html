@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bind</title>
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/1.7.2/jquery.js"></script>
+
+    <script type="text/javascript">
+        //演示动画效果：show()和hide()方法中传入毫秒数以达到动画效果
+        // 只改变高度
+        /*$(function () {
+            $(".head").toggle(function () {
+                $(".content").slideDown(500);
+            }, function () {
+                $(".content").slideUp(500);
+            })
+        });*/
+
+        //只改变透明度
+        /*$(function () {
+            $(".head").toggle(function () {
+                $(".content").fadeIn(500);
+            }, function () {
+                $(".content").fadeOut(500);
+            })
+        });*/
+
+        //toggle()可以切换元素的可见状态
+        //slideToggle():通过高度变化来切换匹配元素的可见性
+        //fadeToggle():通过透明度来切换元素的可见性
+        //faceTo()：把透明度降低到指定值
+        $(function () {
+            $(".content").show();
+            let i = 1;
+            $(".head").click(function () {
+                // $(".content").toggle();
+                // $(".content").slideToggle();
+                // $(".content").fadeToggle();
+                $(".content").fadeTo("slow", i);
+                i = i - 0.1;
+            })
+        });
+
+
+    </script>
+</head>
+<body>
+<div id="pannel">
+    <h5 class="head">什么是jQuery?</h5>
+    <div class="content">
+        jQuery是继Prototype之后有一个优秀的JavaScript库。
+    </div>
+</div>
+</body>
+</html>
